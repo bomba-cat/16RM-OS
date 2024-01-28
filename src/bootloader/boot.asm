@@ -60,9 +60,15 @@ start:
     mov ss, ax
     mov sp, 0x7C00                      ; Placing stack position in front of the system
                                         ; to prevent the system getting overwritten
-
+    
     mov si, floppy_reading
     call .echo
+
+    mov [ebr_drive_number], dl
+    mov ax, 1
+    mov cl, 1
+    mov bx, 0x7c00
+    call .diskread
 
 ;Error Handlers!
 
@@ -138,6 +144,8 @@ start:
     pop cx
     pop bx
     pop ax
+
+    ret
     
 .disk_reset:
     pusha

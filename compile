@@ -3,3 +3,4 @@ dd if=/dev/zero of=./build/image/boot.img bs=1024 count=1440
 dd if=./build/binary/boot.bin of=./build/image/boot.img seek=0 count=1 conv=notrunc
 cp ./build/image/boot.img ./build/image/boot.flp
 mkisofs -no-emul-boot -boot-load-size 4 -o ./build/image/16RM-OS.iso -b boot.flp ./build/image/
+#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
