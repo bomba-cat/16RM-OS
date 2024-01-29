@@ -67,8 +67,11 @@ start:
     mov [ebr_drive_number], dl
     mov ax, 1
     mov cl, 1
-    mov bx, 0x7c00
+    mov bx, 0x7E00
     call .diskread
+
+cli
+    hlt
 
 ;Error Handlers!
 

@@ -1,1 +1,1 @@
-qemu-system-x86_64 -hdd ./build/binary/boot.bin
+qemu-system-x86_64 -fda ./build/image/boot.img
