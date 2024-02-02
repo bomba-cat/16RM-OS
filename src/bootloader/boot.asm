@@ -39,14 +39,14 @@ start:
 .loop:
     lodsb                               ; Load next character in al
     or al, al                           ; Check if al is not empty
-    jz .done                            ; Jump to label .done
+    jz .finishecho                      ; Jump to label .finishecho
 
     mov ah, 0x0E                        ; Bios interrupt to print to the TTY
     mov bh, 0
     int 0x10
 
     jmp .loop
-.done:
+.finishecho:
     pop ax                              ; Pop out stack to the registers
     pop si
     ret
@@ -70,8 +70,28 @@ start:
     mov bx, 0x7E00
     call .diskread
 
-cli
-    hlt
+    mov si, floppy_success
+    call .echo
+
+    mov si, kernel_loading
+    call .echo
+
+    ; Load kernel
+
+    xor ax, ax                          ; Make it zero
+    mov ds, ax                          ; DS must be zero in real mode
+    mov es, ax
+    mov bx, 0x8000
+
+    mov ah, 0x02                        ; BIOS read sector function
+    mov al, 1                           ; Read one sector
+    mov ch, 0                           ; Cylinder number
+    mov cl, 2                           ; Sector number
+    mov dh, 0                           ; Head number
+    mov dl, 0
+    int 0x13                            ; Call BIOS
+
+    jmp 0x8000:0x0000                   ; Jump to the loaded sector
 
 ;Error Handlers!
 
@@ -85,10 +105,6 @@ cli
     mov ah, 0
     int 16h
     jmp 0FFFFh:0
-
-.halt:
-    cli
-    hlt
 
 .lba_to_chs:
     push ax
@@ -120,7 +136,6 @@ cli
     push cx
     call .lba_to_chs
     pop ax
-
     mov ah, 02h
     mov di, 3
 
@@ -128,7 +143,7 @@ cli
     pusha
     stc
     int 13h
-    jnc .finished
+    jnc .finishdiskread
 
     popa
     call .disk_reset
@@ -139,7 +154,7 @@ cli
 .fail:
     jmp .floppy_error
 
-.finished:
+.finishdiskread:
     popa
 
     pop di
@@ -159,9 +174,12 @@ cli
     popa
     ret
 
+ret:                                        db ' ', NEXL, 0
 wait_for_keypress_message:                  db 'Press any key to reboot', 0
 floppy_reading:                             db 'Trying to read from floppy disk...', NEXL, 0
 floppy_error:                               db 'Failed to read from floppy disk!', NEXL, 0
+floppy_success:                             db 'Successfully read from floppy disk!', NEXL, 0
+kernel_loading:                             db 'Trying to load Kernel...', NEXL, 0
 
 times 510-($-$$) db 0                   ; Bios signature
 dw 0AA55h

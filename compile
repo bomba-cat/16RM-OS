@@ -1,6 +1,13 @@
 nasm -f bin ./src/bootloader/boot.asm -o ./build/binary/boot.bin
 dd if=/dev/zero of=./build/image/boot.img bs=1024 count=1440
 dd if=./build/binary/boot.bin of=./build/image/boot.img seek=0 count=1 conv=notrunc
+
+nasm -f bin ./src/kernel/kernel.asm -o ./build/binary/kernel.bin
+dd if=/dev/zero of=./build/image/kernel.img bs=1024 count=1440
+dd if=./build/binary/kernel.bin of=./build/image/kernel.img seek=0 count=1 conv=notrunc
+
+cat ./build/image/boot.img ./build/image/kernel.img > ./build/image/test.img
+
 cp ./build/image/boot.img ./build/image/boot.flp
 mkisofs -no-emul-boot -boot-load-size 4 -o ./build/image/16RM-OS.iso -b boot.flp ./build/image/
 #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
