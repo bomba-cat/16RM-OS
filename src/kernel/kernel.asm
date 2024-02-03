@@ -3,10 +3,7 @@ bits 16
 
 %define NEXL 0x0D, 0x0A
 
-jmp short start
-
-start:
-    jmp .main
+jmp .main
 
 .echo:
     push si
@@ -23,6 +20,7 @@ start:
 .finishedecho:
     pop ax
     pop si
+    ret
 
 .main:
     mov ax, 0
@@ -30,9 +28,14 @@ start:
     mov es, ax
 
     mov ss, ax
-    mov sp, 0x7C00
+    mov sp, 0x8000
 
     mov si, loaded
     call .echo
+
+.hlt:
+    cli
+    hlt
+    jmp .hlt
 
 loaded: db 'Loaded the Kernel!', NEXL, 0

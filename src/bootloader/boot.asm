@@ -91,7 +91,7 @@ start:
     mov dl, 0
     int 0x13                            ; Call BIOS
 
-    jmp 0x8000:0x0000                   ; Jump to the loaded sector
+    jmp 0x8000                          ; Jump to the loaded sector
 
 ;Error Handlers!
 

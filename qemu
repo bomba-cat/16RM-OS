@@ -1,1 +1,1 @@
-qemu-system-x86_64 -fda ./build/image/test.img
+qemu-system-x86_64 -fda ./build/image/16RM.img
