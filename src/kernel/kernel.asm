@@ -23,13 +23,6 @@ jmp .main
     ret
 
 .main:
-    mov ax, 0
-    mov dx, ax
-    mov es, ax
-
-    mov ss, ax
-    mov sp, 0x8000
-
     mov si, loaded
     call .echo
 
@@ -38,4 +31,4 @@ jmp .main
     hlt
     jmp .hlt
 
-loaded: db 'Loaded the Kernel!', NEXL, 0
+loaded: db '[ SUCCESS ]   Loaded the Kernel!', NEXL, 0

@@ -175,11 +175,11 @@ start:
     ret
 
 ret:                                        db ' ', NEXL, 0
-wait_for_keypress_message:                  db 'Press any key to reboot', 0
-floppy_reading:                             db 'Trying to read from floppy disk...', NEXL, 0
-floppy_error:                               db 'Failed to read from floppy disk!', NEXL, 0
-floppy_success:                             db 'Successfully read from floppy disk!', NEXL, 0
-kernel_loading:                             db 'Trying to load Kernel...', NEXL, 0
+wait_for_keypress_message:                  db '[ INFO ]      Press any key to Reboot', 0
+floppy_reading:                             db '[ JOB ]       Trying to read from Floppy...', NEXL, 0
+floppy_error:                               db '[ FAILED ]    Could not read from Floppy!', NEXL, 0
+floppy_success:                             db '[ SUCCESS ]   Could read from Floppy!', NEXL, 0
+kernel_loading:                             db '[ JOB ]       Trying to load Kernel...', NEXL, 0
 
 times 510-($-$$) db 0                   ; Bios signature
 dw 0AA55h

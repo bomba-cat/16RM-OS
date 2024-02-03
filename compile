@@ -9,4 +9,4 @@ dd if=./build/binary/kernel.bin of=./build/image/16RM.img seek=1 conv=notrunc
 
 cp ./build/image/16RM.img ./build/image/16RM.flp
 #mkisofs -no-emul-boot -boot-load-size 4 -o ./build/image/16RM-OS.iso -b boot.flp ./build/image/
-#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
+#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
