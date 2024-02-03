@@ -10,4 +10,4 @@ cat ./build/image/boot.img ./build/image/kernel.img > ./build/image/test.img
 
 cp ./build/image/boot.img ./build/image/boot.flp
 mkisofs -no-emul-boot -boot-load-size 4 -o ./build/image/16RM-OS.iso -b boot.flp ./build/image/
-#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
+#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
