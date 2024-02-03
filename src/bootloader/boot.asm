@@ -27,8 +27,8 @@ ebr_drive_number: db 0		            ; 0x00 = floppy, 0x80 = hdd, useless actuall
 				  db 0	    	        ; reserved
 ebr_signature: db 29h
 ebr_volume_id: db 12h, 34h, 56h 78h     ; Volume ID, not needed, can be anything
-ebr_volume_label: db '16RM-OS    '      ; 11 bytes, padded with spaces!!!
-ebr_system_id: db 'FAT12   '	        ; 8 bytes, padded with spaces!!!
+ebr_volume_label: db '16RM-OS    '      ; 11 bytes, padded with spaces
+ebr_system_id: db 'FAT12   '	        ; 8 bytes, padded with spaces
 
 start:
     jmp .main
