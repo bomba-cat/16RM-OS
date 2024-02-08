@@ -1,7 +1,10 @@
 ; 16 Bit real mode for bios interrupt
+org 0x9000
 bits 16
 
 %define NEXL 0x0D, 0x0A
+
+jmp .read
 
 ; Temporary, didnt add echo driver yet
 .echo:

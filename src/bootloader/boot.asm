@@ -87,7 +87,7 @@ start:
     mov cl, 2                           ; Sector number
     call .diskread
 
-    jmp 0x8000                          ; Jump to the loaded sector
+    jmp 0x9000                          ; Jump to the loaded sector
 
     mov si, kernel_error
     call .echo
