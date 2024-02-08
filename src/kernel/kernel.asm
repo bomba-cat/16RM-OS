@@ -32,8 +32,6 @@ jmp .main
     mov si, keyboard
     call .echo
 
-    ;call .read
-
     mov si, keyboard_enabled
     call .echo
 
