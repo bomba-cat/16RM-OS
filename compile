@@ -5,8 +5,11 @@ dd if=./build/binary/boot.bin of=./build/image/16RM.img seek=0 conv=notrunc
 nasm -f bin ./src/kernel/kernel.asm -o ./build/binary/kernel.bin
 dd if=./build/binary/kernel.bin of=./build/image/16RM.img seek=1 conv=notrunc
 
+nasm -f bin ./src/library/src/read.asm -o ./build/binary/read.bin
+dd if=./build/binary/read.bin of=./build/image/16RM.img seek=2 conv=notrunc
+
 #cat ./build/image/boot.img ./build/image/kernel.img > ./build/image/test.img
 
 cp ./build/image/16RM.img ./build/image/16RM.flp
 #mkisofs -no-emul-boot -boot-load-size 4 -o ./build/image/16RM-OS.iso -b boot.flp ./build/image/
-#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
+#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

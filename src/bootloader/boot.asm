@@ -6,29 +6,29 @@ bits 16                                 ; Using 16 bit Real mode
 jmp short start                         ; Jump to the main instruction
 nop
 
-bdb_oem: db 'MSWIN4.1'	                ; 8 bytes
-bdb_bytes_per_sector: dw 512
-bdb_sectors_per_cluster: db 1
-bdb_reserved_sectors: dw 1
-bdb_fat_count: db 2
-bdb_dir_entry_count: dw 0E0h
-bdb_total_sectors: dw 2880	            ; 2880 * 512 = 1.44Mb
-bdb_media_descriptor_type: db 0F0h		; F0 = 3.5" Floppy disk
-bdb_sectors_per_fat: dw 9		        ; 9 Sectors Fat
-bdb_sectors_per_track: dw 18
-bdb_head: dw 2
-bdb_hidden_sectors: dd 0
-bdb_large_sector_count: dd 0
+bdb_oem:                        db 'MSWIN4.1'	       ; 8 bytes
+bdb_bytes_per_sector:           dw 512
+bdb_sectors_per_cluster:        db 1
+bdb_reserved_sectors:           dw 1
+bdb_fat_count:                  db 2
+bdb_dir_entry_count:            dw 0E0h
+bdb_total_sectors:              dw 2880	               ; 2880 * 512 = 1.44Mb
+bdb_media_descriptor_type:      db 0F0h		           ; F0 = 3.5" Floppy disk
+bdb_sectors_per_fat:            dw 9		           ; 9 Sectors Fat
+bdb_sectors_per_track:          dw 18
+bdb_head:                       dw 2
+bdb_hidden_sectors:             dd 0
+bdb_large_sector_count:         dd 0
 
 ;
 ; Extended Boot Record
 ;
-ebr_drive_number: db 0		            ; 0x00 = floppy, 0x80 = hdd, useless actually
-				  db 0	    	        ; reserved
-ebr_signature: db 29h
-ebr_volume_id: db 12h, 34h, 56h 78h     ; Volume ID, not needed, can be anything
-ebr_volume_label: db '16RM-OS    '      ; 11 bytes, padded with spaces
-ebr_system_id: db 'FAT12   '	        ; 8 bytes, padded with spaces
+ebr_drive_number:               db 0		           ; 0x00 = floppy, 0x80 = hdd, useless
+				                db 0	    	       ; reserved
+ebr_signature:                  db 29h
+ebr_volume_id:                  db 12h, 34h, 56h 78h   ; Volume ID, not needed, can be anything
+ebr_volume_label:               db '16RM-OS    '       ; 11 bytes, padded with spaces
+ebr_system_id:                  db 'FAT12   '	       ; 8 bytes, padded with spaces
 
 start:
     jmp .main
@@ -83,22 +83,22 @@ start:
     mov es, ax
     mov bx, 0x8000
 
-    mov ah, 0x02                        ; BIOS read sector function
     mov al, 1                           ; Read one sector
-    mov ch, 0                           ; Cylinder number
     mov cl, 2                           ; Sector number
-    mov dh, 0                           ; Head number
-    mov dl, 0
-    int 0x13                            ; Call BIOS
+    call .diskread
 
     jmp 0x8000                          ; Jump to the loaded sector
+
+    mov si, kernel_error
+    call .echo
+
+    call .wait_and_reboot
 
 ;Error Handlers!
 
 .floppy_error:
     mov si, floppy_error
     call .echo
-    call .wait_and_reboot
 .wait_and_reboot:
     mov si, wait_for_keypress_message
     call .echo
@@ -174,12 +174,12 @@ start:
     popa
     ret
 
-ret:                                        db ' ', NEXL, 0
-wait_for_keypress_message:                  db '[ INFO ]      Press any key to Reboot', 0
-floppy_reading:                             db '[ JOB ]       Trying to read from Floppy...', NEXL, 0
-floppy_error:                               db '[ FAILED ]    Could not read from Floppy!', NEXL, 0
-floppy_success:                             db '[ SUCCESS ]   Could read from Floppy!', NEXL, 0
-kernel_loading:                             db '[ JOB ]       Trying to load Kernel...', NEXL, 0
+wait_for_keypress_message:          db '    INFO   Press any key to Reboot', 0
+floppy_reading:                     db '     JOB   Trying to read from Floppy', NEXL, 0
+floppy_error:                       db 'CRITICAL   Could not read from Floppy!', NEXL, 0
+floppy_success:                     db ' SUCCESS   Could read from Floppy!', NEXL, 0
+kernel_loading:                     db '     JOB   Trying to load Kernel', NEXL, 0
+kernel_error:                       db 'CRITICAL   Could not load Kernel!', NEXL, 0
 
-times 510-($-$$) db 0                   ; Bios signature
+times 510-($-$$) db 0               ; Bios signature
 dw 0AA55h
