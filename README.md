@@ -3,7 +3,7 @@
 
 # Todo List
 - ~~Kernel loading other programs~~
-- Kernel either staying in 16bit or going in vt8086 mode
+- ~~Kernel either staying in 16bit or going in vt8086 mode~~ staying in 16bit mode because VME isnt stable on AMD
 - Minimum requirements
 - Basic terminal or tty
 - Basic drivers for the Kernel for reading the Keyboard, Priting to the Screen, reading from the Disk etc.
