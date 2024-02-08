@@ -2,7 +2,7 @@
 16 Bit realtime mode operating system made fully in assembly
 
 # Todo List
-- Kernel loading other programs
+- ~~Kernel loading other programs~~
 - Kernel either staying in 16bit or going in vt8086 mode
 - Minimum requirements
 - Basic terminal or tty
