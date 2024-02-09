@@ -12,15 +12,15 @@
 
 ;---------------------------------------        
 ;-------------Kernel start--------------
-        org 0x8000
-        bits 16
+        org 0x8000                      ; Define Kernel Start
+        bits 16                         ; Using 16 Bits for now
         
-        %define NEXL 0x0D, 0x0A
-        jmp .main
+        %define NEXL 0x0D, 0x0A         ; Define \n for .echo Label
+        jmp .main                       ; Jump to Main instruction
 ;---------------------------------------
+;-------------Print-to-TTY--------------
 .echo:
-        ; Print to TTY
-        push si
+        push si                         ; Push used registers
         push ax
 .loopecho:
         lodsb
