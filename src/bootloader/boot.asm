@@ -1,7 +1,7 @@
 ;=======================================
         ;16RM-OS Bootloader made by
         ;xk-rl, ...
-        ;Ver 0.2.0
+        ;Ver. 0.2.0
         ;Last Modified 09 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
