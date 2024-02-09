@@ -13,3 +13,4 @@ dd if=./src/library/build/read.bin of=./build/image/16RM.img seek=2 conv=notrunc
 cp ./build/image/16RM.img ./build/image/16RM.flp
 #mkisofs -no-emul-boot -boot-load-size 4 -o ./build/image/16RM-OS.iso -b boot.flp ./build/image/
 #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
+#test
