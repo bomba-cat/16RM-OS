@@ -3,15 +3,15 @@
         ;xk-rl, ...
         ;Ver. 0.1.6
         ;Last Modified 09 Feb, 2024
-        ;Last Modified By, xk-rl
+        ;Last Modified by, xk-rl
 ;=======================================
         ;Kernel Information
-        ;Sector: 3
+        ;Sector: 2
         ;Size: < 512 bytes
 ;=======================================
 
 ;---------------------------------------        
-;-------------Kernel start--------------
+;-------------Kernel-start--------------
         org 0x8000                      ; Define kernel start
         bits 16                         ; Using 16 bits for now
         
@@ -36,6 +36,7 @@
         pop si
         ret
 ;---------------------------------------
+;----------------Main-------------------
 .main:
         mov si, loaded
         call .echo
@@ -68,7 +69,9 @@ kb_on:
 kb_fail:
         db '  FAILED   Could not activate Keyboard or skipped by Kernel!', NEXL, 0
 ;--------------------------------------
+;---------------CPU-Pause--------------
 .hlt:
         cli                            ; Set CPU in an infinite idling state
         hlt
+        :wall
         jmp .hlt
