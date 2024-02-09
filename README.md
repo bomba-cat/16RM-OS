@@ -2,8 +2,9 @@
 16 Bit realtime mode operating system made fully in assembly
 
 # Todo List
-- ~~Kernel loading other programs~~
+- ~~Kernel loading other programs~~ Applied
 - ~~Kernel either staying in 16bit or going in vt8086 mode~~ staying in 16bit mode because VME isnt stable on AMD
+- Better code Structure for future purposes and better readability
 - Minimum requirements
 - Basic terminal or tty
 - Basic drivers for the Kernel for reading the Keyboard, Priting to the Screen, reading from the Disk etc.
