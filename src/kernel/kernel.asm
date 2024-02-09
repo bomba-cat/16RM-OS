@@ -12,27 +12,27 @@
 
 ;---------------------------------------        
 ;-------------Kernel start--------------
-        org 0x8000                      ; Define Kernel Start
-        bits 16                         ; Using 16 Bits for now
+        org 0x8000                      ; Define kernel start
+        bits 16                         ; Using 16 bits for now
         
-        %define NEXL 0x0D, 0x0A         ; Define \n for .echo Label
-        jmp .main                       ; Jump to Main instruction
+        %define NEXL 0x0D, 0x0A         ; Define \n for .echo label
+        jmp .main                       ; Jump to .main label
 ;---------------------------------------
 ;-------------Print-to-TTY--------------
 .echo:
         push si                         ; Push used registers
         push ax
-.loopecho:
-        lodsb
-        or al, al
-        jz .finecho
-        mov ah, 0x0E
-        mov bh, 0
-        int 0x10
+.loopecho:                              ; Print loop for each letter
+        lodsb                           ; Load next character in al
+        or al, al                       ; Check if al not equal to 0
+        jz .finecho                     ; If equal then finish
+        mov ah, 0x0E                    ; Teletype output
+        mov bh, 0                       ; Page number
+        int 0x10                        ; Bios interrupt
     
-        jmp .loopecho
+        jmp .loopecho                   ; Loop
 .finecho:
-        pop ax
+        pop ax                          ; Pop back our registers and return
         pop si
         ret
 ;---------------------------------------
@@ -46,8 +46,7 @@
         mov si, kb_on
         call .echo
 
-    
-        mov ah, 0x02
+        mov ah, 0x02                    ; Read the third sector, load it into the RAM and jump there
         mov al, 1
         mov cl, 3
         mov bx, 0x9000
@@ -55,9 +54,6 @@
 
         jmp 0x9000
 
-        ;mov si, kb_fail
-        ;mov bx, 4h
-        ;call .echo
 ;--------------------------------------
 ;----------------data------------------
 loaded: 
@@ -73,7 +69,6 @@ kb_fail:
         db '  FAILED   Could not activate Keyboard or skipped by Kernel!', NEXL, 0
 ;--------------------------------------
 .hlt:
-        ; Set CPU in an infinite idling state
-        cli
+        cli                            ; Set CPU in an infinite idling state
         hlt
         jmp .hlt
