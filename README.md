@@ -4,7 +4,7 @@
 # Todo list
 - ~~Kernel loading other programs~~ Applied
 - ~~Kernel either staying in 16bit or going in vt8086 mode~~ staying in 16bit mode because VME isnt stable on AMD
-- Better code structure for future purposes and better readability
+- ~~Better code structure for future purposes and better readability~~
 - Minimum requirements
 - Basic terminal or tty
 - Basic drivers for the kernel for reading the keyboard, priting to the screen, reading from the disk etc.
@@ -16,9 +16,9 @@
 - Make driver to load drivers
 
 # Drivers/Interrupts todo list
-- Driver to reload the kernel
+- ~~Driver to return back to the kernel~~
 - Driver to reboot
-- Driver to read keyboard
+- ~~Driver to read keyboard~~
 - Driver to print to tty
 - Driver to color pixel
 - Driver to read/write files

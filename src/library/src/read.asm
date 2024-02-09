@@ -9,6 +9,7 @@
         ;Sector: 4
         ;Size: < 512 bytes
 ;=======================================
+
 ;---------------------------------------
 ;-----------Read-Driver-Start-----------
         org 0x9000
@@ -75,9 +76,15 @@
         jmp .loopread
 
 .return:
-        mov si, nline                   ; Add return key functionality like used to
+        mov si, nline                  ; Add return key functionality like used to
         call .echo
-        jmp .loopread
+        mov ah, 0x02
+        mov al, 1
+        mov cl, 3
+        mov bx, 0x9000
+        int 0x13
+        
+        jmp 0x9000
 
 .backspace:
         mov al, 8                       ; Add backspace key functionality like used to

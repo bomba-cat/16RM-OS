@@ -36,7 +36,7 @@
         pop si
         ret
 ;---------------------------------------
-;----------------Main-------------------
+;-----------------Main------------------
 .main:
         mov si, loaded
         call .echo
@@ -49,7 +49,7 @@
 
         mov ah, 0x02                    ; Read the third sector, load it into the RAM and jump there
         mov al, 1
-        mov cl, 3
+        mov cl, 4
         mov bx, 0x9000
         int 0x13
 
