@@ -73,5 +73,4 @@ kb_fail:
 .hlt:
         cli                            ; Set CPU in an infinite idling state
         hlt
-        :wall
         jmp .hlt

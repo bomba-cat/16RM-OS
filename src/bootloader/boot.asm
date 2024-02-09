@@ -86,7 +86,7 @@ start:  jmp .main
 .loop:  
         lodsb                           ; Load next character in al
         or al, al                       ; Check if al is not empty
-        jz .finishecho                  ; Jump to label .finishecho
+        jz .finecho                  ; Jump to label .finishecho
 
         mov ah, 0x0E                    ; Bios interrupt to print to the TTY
         mov bh, 0
@@ -109,7 +109,7 @@ start:  jmp .main
         mov sp, 0x7C00                  ; Placing stack position in front of the system
                                         ; to prevent the system getting overwritten
     
-        mov si, floppy_reading
+        mov si, fd_read
         call .echo
 
         mov [ebr_drive_number], dl
@@ -118,10 +118,10 @@ start:  jmp .main
         mov bx, 0x7E00
         call .diskread
 
-        mov si, floppy_success
+        mov si, fd_suc
         call .echo
 
-        mov si, kernel_loading
+        mov si, krl_loaded
         call .echo
 
 ;--------------Load-kernel--------------
@@ -135,9 +135,9 @@ start:  jmp .main
         mov cl, 2                       ; Sector number
         call .diskread
 
-        jmp 0x9000                      ; Jump to the loaded sector
+        jmp 0x8000                      ; Jump to the loaded sector
 
-        mov si, kernel_error
+        mov si, krl_err
         call .echo
 
         call .wait_and_reboot
@@ -145,10 +145,10 @@ start:  jmp .main
 ;--------------------------------------
 ;-----------Error-Handlers-------------
 .floppy_error:
-        mov si, floppy_error
+        mov si, fd_err
         call .echo
 .wait_and_reboot:
-        mov si, wait_for_keypress_message
+        mov si, kb_hlt
         call .echo
         mov ah, 0
         int 16h
@@ -223,22 +223,22 @@ start:  jmp .main
         ret
 ;--------------------------------------
 ;----------------Data------------------
-wait_for_keypress_message:          
+kb_hlt:          
         db '    INFO   Press any key to Reboot', 0
 
-floppy_reading:                     
+fd_read:                     
         db '     JOB   Trying to read from Floppy', NEXL, 0
 
-floppy_error:                       
+fd_err:                       
         db 'CRITICAL   Could not read from Floppy!', NEXL, 0
 
-floppy_success:                     
+fd_suc:                     
         db ' SUCCESS   Could read from Floppy!', NEXL, 0
 
-kernel_loading:                     
+krl_loaded:                     
         db '     JOB   Trying to load Kernel', NEXL, 0
 
-kernel_error:                       
+krl_err:                       
         db 'CRITICAL   Could not load Kernel!', NEXL, 0
 ;-------------------------------------
 ;-----------Bios-Signature------------
