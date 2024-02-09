@@ -1,13 +1,13 @@
 ;=======================================
-        16RM-OS Kernel made by
-        xk-rl, ...
-        Ver. 0.1.6
-        Last Modified 09 Feb, 2024
-        Last Modified By, xk-rl
+        ;16RM-OS Kernel made by
+        ;xk-rl, ...
+        ;Ver. 0.1.6
+        ;Last Modified 09 Feb, 2024
+        ;Last Modified By, xk-rl
 ;=======================================
-        Kernel Information
-        Sector: 3
-        Size: < 512 bytes
+        ;Kernel Information
+        ;Sector: 3
+        ;Size: < 512 bytes
 ;=======================================
 
 ;---------------------------------------        
