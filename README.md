@@ -12,3 +12,4 @@
 - Better File structure
 - FAT 12 Subdirectory
 - If going in 32bit Long Mode with vt8086 mode add FAT32 File system
+- Make driver to load drivers
