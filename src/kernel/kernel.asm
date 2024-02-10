@@ -39,7 +39,15 @@
 ;--------------------------------Main---
 .main:
         mov si, loaded
-        call .echo
+        ;push si
+        ;call .echo
+        mov ah, 0x02
+        mov al, 1
+        mov cl, 6
+        mov bx, 0x9000
+        int 0x13
+
+        jmp 0x9000
 
         mov si, kb
         call .echo

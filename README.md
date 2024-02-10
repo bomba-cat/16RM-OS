@@ -7,7 +7,7 @@
 - ~~Better code structure for future purposes and better readability~~
 - Minimum requirements
 - Basic terminal or tty
-- Debuging with bochs
+- Debugging with bochs
 - Remove the disk read from the bootloader and moving it as a driver
 - Better file structure
 - FAT 12 subdirectory
