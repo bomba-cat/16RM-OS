@@ -35,7 +35,7 @@ bdb_reserved_sectors:
 bdb_fat_count:
         db 2
 
-bdb_dir_entry_count
+bdb_dir_entry_count:
         dw 0E0h
 
 bdb_total_sectors:

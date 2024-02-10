@@ -7,9 +7,8 @@
 - ~~Better code structure for future purposes and better readability~~
 - Minimum requirements
 - Basic terminal or tty
-- Basic drivers for the kernel for reading the keyboard, priting to the screen, reading from the disk etc.
 - Debuging with bochs
-- Remove the disk read driver from the bootloader and moving it as a briver
+- Remove the disk read from the bootloader and moving it as a driver
 - Better file structure
 - FAT 12 subdirectory
 - If going in 32bit long mode with vt8086 mode add FAT32 file system

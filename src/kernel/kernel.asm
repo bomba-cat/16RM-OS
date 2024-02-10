@@ -49,7 +49,7 @@
 
         mov ah, 0x02                    ; Read the third sector, load it into the RAM and jump there
         mov al, 1
-        mov cl, 4
+        mov cl, 5
         mov bx, 0x9000
         int 0x13
 
@@ -71,6 +71,6 @@ kb_fail:
 ;---------------------------------------
 ;---------------------------CPU-Pause---
 .hlt:
-        cli                            ; Set CPU in an infinite idling state
+        cli                             ; Set CPU in an infinite idling state
         hlt
         jmp .hlt

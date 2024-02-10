@@ -55,6 +55,8 @@
         cmp ah, 0x4D
         je .rightarrow
 
+        mov bl, al
+
         mov ah, 0x0E
         mov bh, 0
         int 0x10
@@ -76,14 +78,26 @@
         jmp .loopread
 
 .return:
-        mov si, nline                  ; Add return key functionality like used to
+        mov si, nline                   ; Add return key functionality like used to
         call .echo
+        cmp bl, 114
+        je .reboot
+
         mov ah, 0x02
         mov al, 1
         mov cl, 3
         mov bx, 0x9000
         int 0x13
         
+        jmp 0x9000
+
+.reboot:
+        mov ah, 0x02
+        mov al, 1
+        mov cl, 4
+        mov bx, 0x9000
+        int 0x13
+
         jmp 0x9000
 
 .backspace:
