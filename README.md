@@ -25,10 +25,12 @@
 
 
 # Drivers Memory Location Information
-0x7C00 - Bootloader
-0x8000 - Kernel
-0x9000 - Any drivers which can be overwritten without causing any damage
-0x10000 - Reserved for print/echo driver, shall not be overwritten at any cost
-0x11000+ - Not allocated yet, free to use
+| **Driver** | **Memory Location |
+| ------ | --------------- |
+| Bootloader | 0x7C00 |
+| Kernel | 0x8000 |
+| Any Driver which can get overwritten | 0x9000 |
+| Reserved for print/echo driver, dont overwrite at any cost | 0x10000 |
+| Not allocated yet | 0x11000+ |
 ## Important
 I will soon redo the memory reservations to take up less memory and make more available!

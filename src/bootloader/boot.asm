@@ -20,28 +20,28 @@
         nop
 ;---------------------------------------
 ;------------------------FAT12-Header---
-bdb_oem:                        
+bdb_oem:
         db 'MSWIN4.1'	                ; 8 bytes
 
-bdb_bytes_per_sector:           
+bdb_bytes_per_sector:
         dw 512
 
-bdb_sectors_per_cluster:        
+bdb_sectors_per_cluster:
         db 1
 
-bdb_reserved_sectors:           
+bdb_reserved_sectors:
         dw 1
 
-bdb_fat_count:                  
+bdb_fat_count:
         db 2
 
-bdb_dir_entry_count:            
+bdb_dir_entry_count
         dw 0E0h
 
-bdb_total_sectors:              
+bdb_total_sectors:
         dw 2880	                        ; 2880 * 512 = 1.44Mb
 
-bdb_media_descriptor_type:      
+bdb_media_descriptor_type:
         db 0F0h		                    ; F0 = 3.5" Floppy disk
 
 bdb_sectors_per_fat:            

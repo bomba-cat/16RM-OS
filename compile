@@ -14,7 +14,4 @@ dd if=./src/library/build/reboot.bin of=./build/image/16RM.img seek=3 conv=notru
 nasm -f bin ./src/library/src/read.asm -o ./src/library/build/read.bin
 dd if=./src/library/build/read.bin of=./build/image/16RM.img seek=4 conv=notrunc
 
-#cat ./build/image/boot.img ./build/image/kernel.img > ./build/image/test.img
-
 cp ./build/image/16RM.img ./build/image/16RM.flp
-#mkisofs -no-emul-boot -boot-load-size 4 -o ./build/image/16RM-OS.iso -b boot.flp ./build/image/
