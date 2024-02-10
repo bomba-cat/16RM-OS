@@ -1,8 +1,8 @@
 ;=======================================
         ;16RM-OS Kernel made by
         ;xk-rl, ...
-        ;Ver. 0.1.6
-        ;Last Modified 09 Feb, 2024
+        ;Ver. 0.1.7
+        ;Last Modified 10 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Kernel Information
@@ -11,14 +11,14 @@
 ;=======================================
 
 ;---------------------------------------        
-;-------------Kernel-start--------------
+;------------------------Kernel-start---
         org 0x8000                      ; Define kernel start
         bits 16                         ; Using 16 bits for now
         
         %define NEXL 0x0D, 0x0A         ; Define \n for .echo label
         jmp .main                       ; Jump to .main label
 ;---------------------------------------
-;-------------Print-to-TTY--------------
+;------------------------Print-to-TTY---
 .echo:
         push si                         ; Push used registers
         push ax
@@ -36,7 +36,7 @@
         pop si
         ret
 ;---------------------------------------
-;-----------------Main------------------
+;--------------------------------Main---
 .main:
         mov si, loaded
         call .echo
@@ -55,8 +55,8 @@
 
         jmp 0x9000
 
-;--------------------------------------
-;----------------data------------------
+;---------------------------------------
+;--------------------------------Data---
 loaded: 
         db ' SUCCESS   Loaded the Kernel!', NEXL, 0
 
@@ -68,8 +68,8 @@ kb_on:
 
 kb_fail:
         db '  FAILED   Could not activate Keyboard or skipped by Kernel!', NEXL, 0
-;--------------------------------------
-;---------------CPU-Pause--------------
+;---------------------------------------
+;---------------------------CPU-Pause---
 .hlt:
         cli                            ; Set CPU in an infinite idling state
         hlt

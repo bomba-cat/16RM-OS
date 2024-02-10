@@ -8,8 +8,11 @@ dd if=./build/binary/kernel.bin of=./build/image/16RM.img seek=1 conv=notrunc
 nasm -f bin ./src/library/src/return.asm -o ./src/library/build/return.bin
 dd if=./src/library/build/return.bin of=./build/image/16RM.img seek=2 conv=notrunc
 
+nasm -f bin ./src/library/src/reboot.asm -o ./src/library/build/reboot.bin
+dd if=./src/library/build/reboot.bin of=./build/image/16RM.img seek=3 conv=notrunc
+
 nasm -f bin ./src/library/src/read.asm -o ./src/library/build/read.bin
-dd if=./src/library/build/read.bin of=./build/image/16RM.img seek=3 conv=notrunc
+dd if=./src/library/build/read.bin of=./build/image/16RM.img seek=4 conv=notrunc
 
 #cat ./build/image/boot.img ./build/image/kernel.img > ./build/image/test.img
 

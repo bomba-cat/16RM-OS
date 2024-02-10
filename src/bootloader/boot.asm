@@ -1,17 +1,17 @@
 ;=======================================
         ;16RM-OS Bootloader made by
         ;xk-rl, ...
-        ;Ver. 0.2.0
-        ;Last Modified 09 Feb, 2024
+        ;Ver. 0.2.1
+        ;Last Modified 10 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Bootloader Information
         ;Sector: 1
-        ;Size: 512 bytes exact
+        ;Size: = 512 bytes
 ;=======================================
 
 ;---------------------------------------
-;-----------Bootloader-start------------
+;--------------------Bootloader-start---
         org 0x7C00                      ; Starting position of bootloader
         bits 16                         ; Using 16 bit real mode
 
@@ -19,7 +19,7 @@
         jmp short start                 ; Jump to the main instruction
         nop
 ;---------------------------------------
-;-------------FAT12-Header--------------
+;------------------------FAT12-Header---
 bdb_oem:                        
         db 'MSWIN4.1'	                ; 8 bytes
 
@@ -59,7 +59,7 @@ bdb_hidden_sectors:
 bdb_large_sector_count:         
         dd 0
 ;---------------------------------------
-;---------Extended-Boot-Record----------
+;----------------Extended-Boot-Record---
 ebr_drive_number:               
         db 0                            ; Floppy
         db 0	    	                ; Reserved
@@ -76,10 +76,10 @@ ebr_volume_label:
 ebr_system_id:                  
         db 'FAT12   '	                ; 8 bytes, padded with spaces
 ;---------------------------------------
-;------------Jump-Start-----------------
+;--------------------------Jump-Start---
 start:  jmp .main
 ;---------------------------------------
-;-------------Print-to-TTY--------------
+;------------------------Print-to-TTY---
 .echo:  
         push si                         ; Push needed registers to stack
         push ax
@@ -98,7 +98,7 @@ start:  jmp .main
         pop si
         ret
 ;---------------------------------------
-;----------------Main-------------------
+;--------------------------------Main---
 .main:
         mov ax, 0; Setup data segment
         mov dx, ax
@@ -124,7 +124,7 @@ start:  jmp .main
         mov si, krl_loaded
         call .echo
 
-;--------------Load-kernel--------------
+;-------------------------Load-kernel---
 
         xor ax, ax                      ; Make it zero
         mov ds, ax                      ; DS must be zero in real mode
@@ -142,8 +142,8 @@ start:  jmp .main
 
         call .wait_and_reboot
 
-;--------------------------------------
-;-----------Error-Handlers-------------
+;---------------------------------------
+;---------------------Error-Handlers----
 .floppy_error:
         mov si, fd_err
         call .echo
@@ -221,8 +221,8 @@ start:  jmp .main
         jc .floppy_error
         popa
         ret
-;--------------------------------------
-;----------------Data------------------
+;---------------------------------------
+;--------------------------------Data---
 kb_hlt:          
         db '    INFO   Press any key to Reboot', 0
 
@@ -240,7 +240,7 @@ krl_loaded:
 
 krl_err:                       
         db 'CRITICAL   Could not load Kernel!', NEXL, 0
-;-------------------------------------
-;-----------Bios-Signature------------
+;---------------------------------------
+;----------------------Bios-Signature---
 times 510-($-$$) db 0                 ; Bios signature
 dw 0AA55h

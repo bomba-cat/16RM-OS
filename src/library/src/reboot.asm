@@ -1,23 +1,22 @@
 ;=======================================
-        ;16RM-OS Return Driver made by
+        ;16RM-OS Reboot Driver made by
         ;xk-rl, ...
-        ;Ver. 0.0.2
+            ;Ver. 0.0.1
         ;Last Modified 10 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
-        ;Return Driver Information
-        ;Sector: 3
+        ;Reboot Driver Information
+        ;Sector: 4
         ;Size: < 512 bytes
 ;=======================================
 
 ;---------------------------------------
-;-----------------Return-Driver-Start---
+;-----------------Reboot-Driver-Start---
         org 0x9000
         bits 16
         
-        jmp .return
+        jmp .reboot
 ;---------------------------------------
 ;--------------------------------Main---
-.return:
-                                        ; Implement message saying "Returning to Kernel"
-        jmp 0x8000
+.reboot:
+        jmp 0FFFFh:0

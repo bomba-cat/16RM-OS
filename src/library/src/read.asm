@@ -1,24 +1,24 @@
 ;=======================================
         ;16RM-OS Read Driver made by
         ;xk-rl, ...
-        ;Ver. 0.0.1
-        ;Last Modified 09 Feb, 2024
+        ;Ver. 0.0.2
+        ;Last Modified 10 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Read Driver Information
-        ;Sector: 4
+        ;Sector: 5
         ;Size: < 512 bytes
 ;=======================================
 
 ;---------------------------------------
-;-----------Read-Driver-Start-----------
+;-------------------Read-Driver-Start---
         org 0x9000
         bits 16
 
         %define NEXL 0x0D, 0x0A
         jmp .read
 ;---------------------------------------
-;-------------Print-to-TTY--------------
+;------------------------Print-to-TTY---
 .echo:
         push si                         ; Print to TTY
         push ax
@@ -36,7 +36,7 @@
         pop si
         ret
 ;---------------------------------------
-;----------Read-Keyboard-Keys-----------
+;------------------Read-Keyboard-Keys---
 .read:
                                         ; Read keyboard strokes and print to TTY
 .loopread:
@@ -101,6 +101,6 @@
 
         jmp .loopread
 ;---------------------------------------
-;-----------------Data------------------
+;--------------------------------Data---
 nline:                      
         db '', NEXL, 0
