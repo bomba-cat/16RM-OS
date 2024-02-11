@@ -38,6 +38,11 @@
         mov bx, 10000
         call .loaddriver
 
+        mov si, kb_test_space
+        mov cl, 6
+        mov bx, 10000
+        call .loaddriver
+
         mov cl, 5
         mov bx, 9000
         call .loaddriver
@@ -45,6 +50,10 @@
         mov si, kb_on
         mov cl, 6
         mov bx, 10000
+        call .loaddriver
+
+        mov cl, 4
+        mov bx, 9000
         call .loaddriver
 ;---------------------------------------
 ;--------------------------------Data---
@@ -59,6 +68,8 @@ kb_on:
 
 kb_fail:
         db '  FAILED   Could not activate Keyboard or skipped by Kernel!', NEXL, 0
+kb_test_space:
+        db '           ', 0
 ;---------------------------------------
 ;---------------------------CPU-Pause---
 .hlt:

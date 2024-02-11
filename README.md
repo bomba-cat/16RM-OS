@@ -33,3 +33,14 @@
 | Not allocated yet | 0x11000+ |
 ## Important
 I will soon redo the memory reservations to take up less memory and make more available!
+Reworking this table soon!
+
+# Drivers Sector Location Information
+| **Sector** | **Driver** |
+| -------- | ------ |
+| 1 | Bootloader |
+| 2 | Kernel |
+| 3 | Reboot |
+| 4 | Reload kernel |
+| 5 | Read Keyboard |
+| 6 | Echo/Print |
