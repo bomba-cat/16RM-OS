@@ -31,7 +31,7 @@
         mov si, loaded
         mov cl, 6
         mov bx, 10000
-        call .loaddriver
+        call .loaddriver                ; Load first message while also loading driver
 
         mov si, kb
         mov cl, 6
@@ -52,7 +52,7 @@
         mov bx, 10000
         call .loaddriver
 
-        mov cl, 4
+        mov cl, 4                       ; Reboot
         mov bx, 9000
         call .loaddriver
 ;---------------------------------------

@@ -20,4 +20,8 @@
 ;--------------------------------Main---
 .return:
                                         ; Implement message saying "Returning to Kernel"
+        mov ah, 0x02
+        mov al, 1
+        mov cl, 2
+        mov bx, 0x8000
         jmp 0x8000

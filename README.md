@@ -11,8 +11,8 @@
 - Remove the disk read from the bootloader and moving it as a driver
 - Better file structure
 - FAT 12 subdirectory
-- If going in 32bit long mode with vt8086 mode add FAT32 file system
-- Make driver to load drivers
+- ~~If going in 32bit long mode with vt8086 mode add FAT32 file system~~ staying in 16 bit
+- Fix loaded driver not returning to kernel
 
 # Drivers/Interrupts todo list
 - ~~Driver to return back to the kernel~~
@@ -21,26 +21,27 @@
 - Driver to print to tty
 - Driver to color pixel
 - Driver to read/write files
+- Driver to load other drivers
 
 
 # Drivers Memory Location Information
-| **Driver** | **Memory Location |
-| ------ | --------------- |
-| Bootloader | 0x7C00 |
-| Kernel | 0x8000 |
-| Any Driver which can get overwritten | 0x9000 |
-| Reserved for print/echo driver, dont overwrite at any cost | 0x10000 |
-| Not allocated yet | 0x11000+ |
+| **Memory Location** | **Driver** | **Exception** |
+| --------------- | ------ | --------- |
+| 0x7C00 | Bootloader | |
+| 0x8000 | Kernel | |
+| 9000 | Any drivers which are one time use and can be overwritten later | Read driver |
+| 10000 | Echo driver |
+| 11000+ | for future purposes |
 ## Important
 I will soon redo the memory reservations to take up less memory and make more available!
 Reworking this table soon!
 
 # Drivers Sector Location Information
 | **Sector** | **Driver** |
-| -------- | ------ |
+| ------ | ------ |
 | 1 | Bootloader |
 | 2 | Kernel |
-| 3 | Reboot |
-| 4 | Reload kernel |
+| 3 | Reload Kernel |
+| 4 | Reboot |
 | 5 | Read Keyboard |
-| 6 | Echo/Print |
+| 6 | Echo |
