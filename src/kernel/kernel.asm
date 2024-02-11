@@ -52,6 +52,15 @@
         mov bx, 10000
         call .loaddriver
 
+        mov si, load_tty
+        mov cl, 6
+        mov bx, 10000
+        call .loaddriver
+
+        mov cl, 10
+        mov bx, 20000
+        call .loaddriver
+
         mov cl, 4                       ; Reboot
         mov bx, 9000
         call .loaddriver
@@ -68,8 +77,12 @@ kb_on:
 
 kb_fail:
         db '  FAILED   Could not activate Keyboard or skipped by Kernel!', NEXL, 0
+
 kb_test_space:
         db '           ', 0
+
+load_tty:
+        db '     JOB   Loading TTY', NEXL, 0
 ;---------------------------------------
 ;---------------------------CPU-Pause---
 .hlt:

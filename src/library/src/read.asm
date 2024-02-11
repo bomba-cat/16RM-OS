@@ -18,23 +18,19 @@
         %define NEXL 0x0D, 0x0A
         jmp .read
 ;---------------------------------------
-;------------------------Print-to-TTY---
+;-------------------------Load-Driver---
+.loaddriver:
+        mov ah, 0x02
+        mov al, 1
+        int 0x13
+        
+        jmp bx
+;---------------------------------------
+;------------------------Print-To-TTY---
 .echo:
-        push si                         ; Print to TTY
-        push ax
-.loopecho:
-        lodsb
-        or al, al
-        jz .finishedecho
-        mov ah, 0x0E
-        mov bh, 0
-        int 0x10
-    
-        jmp .loopecho
-.finishedecho:
-        pop ax
-        pop si
-        ret
+        mov cl, 6
+        mov bx, 10000
+        call .loaddriver
 ;---------------------------------------
 ;------------------Read-Keyboard-Keys---
 .read:
@@ -80,18 +76,7 @@
 .return:
         mov si, nline                   ; Add return key functionality like used to
         call .echo
-        cmp bl, 114
-        je .reboot
         ret
-
-.reboot:
-        mov ah, 0x02
-        mov al, 1
-        mov cl, 4
-        mov bx, 9000
-        int 0x13
-
-        jmp 9000
 
 .backspace:
         mov al, 8                       ; Add backspace key functionality like used to

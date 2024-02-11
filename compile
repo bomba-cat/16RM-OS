@@ -17,4 +17,7 @@ dd if=./src/library/build/read.bin of=./build/image/16RM.img seek=4 conv=notrunc
 nasm -f bin ./src/library/src/echo.asm -o ./src/library/build/echo.bin
 dd if=./src/library/build/echo.bin of=./build/image/16RM.img seek=5 conv=notrunc
 
+nasm -f bin ./src/programs/src/terminal.asm -o ./src/programs/build/terminal.bin
+dd if=./src/programs/build/terminal.bin of=./build/image/16RM.img seek=9 conv=notrunc
+
 cp ./build/image/16RM.img ./build/image/16RM.flp
