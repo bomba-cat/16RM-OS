@@ -2,7 +2,7 @@
         ;16RM-OS Reboot Driver made by
         ;xk-rl, ...
         ;Ver. 0.0.1
-        ;Last Modified 10 Feb, 2024
+        ;Last Modified 11 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Reboot Driver Information
@@ -12,7 +12,7 @@
 
 ;---------------------------------------
 ;-----------------Reboot-Driver-Start---
-        org 0x9000
+        org 9000
         bits 16
         
         jmp .reboot

@@ -2,7 +2,7 @@
         ;16RM-OS Kernel made by
         ;xk-rl, ...
         ;Ver. 0.1.7
-        ;Last Modified 10 Feb, 2024
+        ;Last Modified 11 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Kernel Information
@@ -18,51 +18,34 @@
         %define NEXL 0x0D, 0x0A         ; Define \n for .echo label
         jmp .main                       ; Jump to .main label
 ;---------------------------------------
-;------------------------Print-to-TTY---
-.echo:
-        push si                         ; Push used registers
-        push ax
-.loopecho:                              ; Print loop for each letter
-        lodsb                           ; Load next character in al
-        or al, al                       ; Check if al not equal to 0
-        jz .finecho                     ; If equal then finish
-        mov ah, 0x0E                    ; Teletype output
-        mov bh, 0                       ; Page number
-        int 0x10                        ; Bios interrupt
-    
-        jmp .loopecho                   ; Loop
-.finecho:
-        pop ax                          ; Pop back our registers and return
-        pop si
-        ret
+;-------------------------Load-Driver---
+.loaddriver:
+        mov ah, 0x02
+        mov al, 1
+        int 0x13
+
+        jmp bx
 ;---------------------------------------
 ;--------------------------------Main---
 .main:
         mov si, loaded
-        ;push si
-        ;call .echo
-        mov ah, 0x02
-        mov al, 1
         mov cl, 6
-        mov bx, 0x9000
-        int 0x13
-
-        jmp 0x9000
+        mov bx, 10000
+        call .loaddriver
 
         mov si, kb
-        call .echo
+        mov cl, 6
+        mov bx, 10000
+        call .loaddriver
+
+        mov cl, 5
+        mov bx, 9000
+        call .loaddriver
 
         mov si, kb_on
-        call .echo
-
-        mov ah, 0x02                    ; Read the third sector, load it into the RAM and jump there
-        mov al, 1
-        mov cl, 5
-        mov bx, 0x9000
-        int 0x13
-
-        jmp 0x9000
-
+        mov cl, 6
+        mov bx, 10000
+        call .loaddriver
 ;---------------------------------------
 ;--------------------------------Data---
 loaded: 

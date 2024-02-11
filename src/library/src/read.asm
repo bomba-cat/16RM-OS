@@ -2,7 +2,7 @@
         ;16RM-OS Read Driver made by
         ;xk-rl, ...
         ;Ver. 0.0.2
-        ;Last Modified 10 Feb, 2024
+        ;Last Modified 11 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Read Driver Information
@@ -12,7 +12,7 @@
 
 ;---------------------------------------
 ;-------------------Read-Driver-Start---
-        org 0x9000
+        org 9000
         bits 16
 
         %define NEXL 0x0D, 0x0A
@@ -82,23 +82,16 @@
         call .echo
         cmp bl, 114
         je .reboot
-
-        mov ah, 0x02
-        mov al, 1
-        mov cl, 3
-        mov bx, 0x9000
-        int 0x13
-        
-        jmp 0x9000
+        ret
 
 .reboot:
         mov ah, 0x02
         mov al, 1
         mov cl, 4
-        mov bx, 0x9000
+        mov bx, 9000
         int 0x13
 
-        jmp 0x9000
+        jmp 9000
 
 .backspace:
         mov al, 8                       ; Add backspace key functionality like used to
