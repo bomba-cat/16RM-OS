@@ -1,7 +1,7 @@
 ;=======================================
         ;16RM-OS Kernel made by
         ;xk-rl, ...
-        ;Ver. 0.2.0
+        ;Ver. 0.2.1
         ;Last Modified 12 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================

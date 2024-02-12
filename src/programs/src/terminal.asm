@@ -1,7 +1,7 @@
 ;=======================================
         ;Assembly Terminal made by
         ;xk-rl, ...
-        ;Ver. 0.0.1
+        ;Ver. 0.0.2
         ;Last Modified 12 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
@@ -36,6 +36,12 @@
         mov cl, 5
         mov bx, 9000
         call .loaddriver
+
+        mov cl, 6
+        mov bx, 10000
+        call .loaddriver
+
+        jmp .main
 
         ret
 

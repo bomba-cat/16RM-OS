@@ -1,7 +1,7 @@
 ;=======================================
         ;16RM-OS Read Driver made by
         ;xk-rl, ...
-        ;Ver. 0.0.3
+        ;Ver. 0.0.4
         ;Last Modified 12 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
@@ -32,6 +32,8 @@
 .read:
                                         ; Read keyboard strokes and print to TTY
         mov cx, 0                       ; Counter to not overwrite any text made by echo driver
+        mov bx, 0
+        mov dx, 0
 .loopread:
         mov ah, 0x0
         int 0x16
@@ -50,11 +52,13 @@
         cmp ah, 0x4D
         je .rightarrow
 
-        mov bl, al
-
         mov ah, 0x0E
         mov bh, 0
         int 0x10
+
+        mov [input+bx], al
+
+        inc bx
         jmp .loopread
 
 .rightarrow:
@@ -74,8 +78,11 @@
 
 .return:
         mov si, nline                   ; Add return key functionality like used to
-        mov cx, 0
         call .echo
+                                        ; Do some modification with our input before returning
+        mov [input+bx], dx
+        mov si, input
+        
         ret
 
 .backspace:
@@ -94,8 +101,15 @@
         mov al, 8
         int 0x10
 
+        dec bx
+
+        mov [input+bx], dx
+
         jmp .loopread
 ;---------------------------------------
 ;--------------------------------Data---
 nline:                      
         db '', NEXL, 0
+
+input:
+        db '',
