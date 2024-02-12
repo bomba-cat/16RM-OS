@@ -2,7 +2,7 @@
         ;16RM-OS Read Driver made by
         ;xk-rl, ...
         ;Ver. 0.0.3
-        ;Last Modified 11 Feb, 2024
+        ;Last Modified 12 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Read Driver Information
@@ -19,22 +19,19 @@
         jmp .read
 ;---------------------------------------
 ;-------------------------Load-Driver---
-.loaddriver:
+.echo:
         mov ah, 0x02
         mov al, 1
-        int 0x13
-        
-        jmp bx
-;---------------------------------------
-;------------------------Print-To-TTY---
-.echo:
         mov cl, 6
         mov bx, 10000
-        call .loaddriver
+        int 0x13
+        
+        jmp 10000
 ;---------------------------------------
 ;------------------Read-Keyboard-Keys---
 .read:
                                         ; Read keyboard strokes and print to TTY
+        mov cx, 0                       ; Counter to not overwrite any text made by echo driver
 .loopread:
         mov ah, 0x0
         int 0x16
@@ -44,6 +41,8 @@
 
         cmp al, 8
         je .backspace
+
+        inc cx
 
         cmp ah, 0x4B
         je .leftarrow
@@ -75,10 +74,14 @@
 
 .return:
         mov si, nline                   ; Add return key functionality like used to
+        mov cx, 0
         call .echo
         ret
 
 .backspace:
+        cmp cx, 0
+        je .loopread
+        dec cx
         mov al, 8                       ; Add backspace key functionality like used to
         mov al, 8
         mov ah, 0x0E

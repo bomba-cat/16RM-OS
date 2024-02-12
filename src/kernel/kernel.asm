@@ -2,7 +2,7 @@
         ;16RM-OS Kernel made by
         ;xk-rl, ...
         ;Ver. 0.2.0
-        ;Last Modified 11 Feb, 2024
+        ;Last Modified 12 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Kernel Information
@@ -38,14 +38,14 @@
         mov bx, 10000
         call .loaddriver
 
-        mov si, kb_test_space
-        mov cl, 6
-        mov bx, 10000
-        call .loaddriver
+        ;mov si, kb_test_space
+        ;mov cl, 6
+        ;mov bx, 10000
+        ;call .loaddriver
 
-        mov cl, 5
-        mov bx, 9000
-        call .loaddriver
+        ;mov cl, 5
+        ;mov bx, 9000
+        ;call .loaddriver
 
         mov si, kb_on
         mov cl, 6
@@ -67,16 +67,19 @@
 ;---------------------------------------
 ;--------------------------------Data---
 loaded: 
-        db ' SUCCESS   Loaded the Kernel!', NEXL, 0
+        db ' SUCCESS   Loaded the kernel and echo driver!', NEXL, 0
 
-kb:     
+kb_test:     
         db '     JOB   Enabling keyboard, type something and hit enter', NEXL, 0
+
+kb:
+        db '     JOB   Enabling keyboard', NEXL, 0
 
 kb_on:  
         db ' SUCCESS   Keyboard enabled!', NEXL, 0
 
 kb_fail:
-        db '  FAILED   Could not activate Keyboard or skipped by Kernel!', NEXL, 0
+        db '  FAILED   Could not activate keyboard or skipped by kernel!', NEXL, 0
 
 kb_test_space:
         db '           ', 0
@@ -86,6 +89,5 @@ load_tty:
 ;---------------------------------------
 ;---------------------------CPU-Pause---
 .hlt:
-        cli                             ; Set CPU in an infinite idling state
         hlt
         jmp .hlt

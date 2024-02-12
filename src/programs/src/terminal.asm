@@ -2,7 +2,7 @@
         ;Assembly Terminal made by
         ;xk-rl, ...
         ;Ver. 0.0.1
-        ;Last Modified 11 Feb, 2024
+        ;Last Modified 12 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Terminal Information
@@ -42,7 +42,7 @@
 ;---------------------------------------
 ;--------------------------------Data---
 tty:
-        db '16RM-TTY->', 0
+        db '16RM-TTY-> ', 0
 
 clear:
         db ' ', NEXL, 0
