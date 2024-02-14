@@ -80,7 +80,7 @@
         mov si, nline                   ; Add return key functionality like used to
         call .echo
                                         ; Do some modification with our input before returning
-        mov [input+bx], dx
+        ;mov [input+bx], dx
         mov si, input
         
         ret
