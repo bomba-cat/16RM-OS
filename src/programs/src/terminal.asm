@@ -109,7 +109,7 @@
 ;--------------------------------Data---
 
 tty:
-        db '16RM-TTY-> ', 0
+        db NEXL, '16RM-TTY-> ', 0
 
 reboot:
         db 'reboot', 0
