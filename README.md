@@ -45,3 +45,7 @@
 | 5 | Read Keyboard |
 | 6 | Echo |
 | 7 | Load Sector |
+| 10 | Terminal |
+
+# Important
+Any other sector is free to use. Overwriting any sectors is possible, but at your own risk

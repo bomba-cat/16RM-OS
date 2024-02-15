@@ -77,6 +77,8 @@
         call .compare
         je .reload
 
+                                        ; Resolution, switch resolution to 320x200
+                                        ; Switch back using clear command
         mov di, res1
         call .compare
         je .res1
