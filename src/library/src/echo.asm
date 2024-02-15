@@ -1,8 +1,8 @@
 ;=======================================
         ;16RM-OS Echo Driver made by
         ;xk-rl, ...
-        ;Ver. 0.0.2
-        ;Last Modified 11 Feb, 2024
+        ;Ver. 0.0.3
+        ;Last Modified 15 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Echo Driver Information
@@ -19,6 +19,8 @@
 ;---------------------------------------
 ;--------------------------------Main---
 .echo:
+        push si
+        push ax
 .loopecho:
         lodsb
         or al, al

@@ -1,7 +1,7 @@
 ;=======================================
         ;Assembly Terminal made by
         ;xk-rl, ...
-        ;Ver. 0.1.0
+        ;Ver. 0.1.1
         ;Last Modified 14 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
@@ -77,6 +77,10 @@
         call .compare
         je .reload
 
+        mov di, res1
+        call .compare
+        je .res1
+
                                         ; If nothing, echo given command
         mov cl, 6
         mov bx, 10000
@@ -105,6 +109,12 @@
         mov bx, 9000
         call .loaddriver
 
+.res1:
+        mov ah, 0h
+        mov al, 1h
+        int 0x10
+        jmp .main
+
 ;---------------------------------------
 ;--------------------------------Data---
 
@@ -119,3 +129,6 @@ clear:
 
 reload:
         db 'reload', 0
+
+res1:
+        db 'res1', 0
