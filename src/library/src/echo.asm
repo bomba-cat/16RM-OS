@@ -31,4 +31,6 @@
 
         jmp .loopecho
 .finishedecho:
+        pop ax
+        pop si
         ret
