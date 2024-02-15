@@ -1,8 +1,8 @@
 ;=======================================
         ;16RM-OS Read Driver made by
         ;xk-rl, ...
-        ;Ver. 0.0.4
-        ;Last Modified 12 Feb, 2024
+        ;Ver. 0.0.5
+        ;Last Modified 15 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Read Driver Information
@@ -62,17 +62,22 @@
         jmp .loopread
 
 .rightarrow:
-        mov bh, 0                       ; Add arrow key
-        mov ah, 0x09
+        mov ah, 3h
         int 0x10
-        mov ah, 0x0E
+        mov ah, 2h
+        inc dl
         int 0x10
+        inc cx
         jmp .loopread
 
 .leftarrow:
-        mov al, 8                       ; Add arrow key
-        mov ah, 0x0E
-        mov bh, 0
+        cmp cx, 0
+        je .loopread
+        dec cx
+        mov ah, 3h
+        int 0x10
+        mov ah, 2h
+        dec dl
         int 0x10
         jmp .loopread
 

@@ -1,8 +1,8 @@
 ;=======================================
         ;16RM-OS Kernel made by
         ;xk-rl, ...
-        ;Ver. 0.2.1
-        ;Last Modified 12 Feb, 2024
+        ;Ver. 0.2.2
+        ;Last Modified 15 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Kernel Information
@@ -61,6 +61,14 @@
         mov bx, 20000
         call .loaddriver
 
+        mov si, finished
+        mov cl, 6
+        mov bx, 10000
+        call .loaddriver
+
+        mov ah, 0
+        int 16h
+
         mov cl, 4                       ; Reboot
         mov bx, 9000
         call .loaddriver
@@ -86,6 +94,9 @@ kb_test_space:
 
 load_tty:
         db '     JOB   Loading TTY', NEXL, 0
+
+finished:
+        db NEXL, '    DONE   Finished the kernel, press any key to continue', 0
 ;---------------------------------------
 ;---------------------------CPU-Pause---
 .hlt:

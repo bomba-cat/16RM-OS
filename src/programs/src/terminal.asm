@@ -25,6 +25,8 @@
         mov al, 1
         int 0x13
 
+        mov cx, 0
+        mov dx, 0
         jmp bx
 
 ;---------------------------------------
@@ -83,6 +85,11 @@
         call .compare
         je .res1
 
+                                        ; Exit, return to kernl
+        mov di, exit
+        call .compare
+        je .loadkernel
+
                                         ; If nothing, echo given command
         mov cl, 6
         mov bx, 10000
@@ -90,6 +97,7 @@
 
         jmp .main
 
+.loadkernel:
         ret
 
 ;---------------------------------------
@@ -134,3 +142,6 @@ reload:
 
 res1:
         db 'res1', 0
+
+exit:
+        db 'exit', 0

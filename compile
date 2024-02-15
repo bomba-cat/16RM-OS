@@ -17,6 +17,12 @@ dd if=./src/library/build/read.bin of=./build/image/16RM.img seek=4 conv=notrunc
 nasm -f bin ./src/library/src/echo.asm -o ./src/library/build/echo.bin
 dd if=./src/library/build/echo.bin of=./build/image/16RM.img seek=5 conv=notrunc
 
+nasm -f bin ./src/library/src/loaddriver.asm -o ./src/library/build/loaddriver.bin
+dd if=./src/library/build/loaddriver.bin of=./build/image/16RM.img seek=6 conv=notrunc
+
+nasm -f bin ./src/library/src/color.asm -o ./src/library/build/color.bin
+dd if=./src/library/build/color.bin of=./build/image/16RM.img seek=7 conv=notrunc
+
 nasm -f bin ./src/programs/src/terminal.asm -o ./src/programs/build/terminal.bin
 dd if=./src/programs/build/terminal.bin of=./build/image/16RM.img seek=9 conv=notrunc
 
