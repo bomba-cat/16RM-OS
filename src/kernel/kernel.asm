@@ -61,6 +61,10 @@
         mov bx, 20000
         call .loaddriver
 
+        mov cl, 11
+        mov bx, 31000
+        call .loaddriver
+
         mov si, finished
         mov cl, 6
         mov bx, 10000

@@ -30,6 +30,9 @@
 ;---------------------------------------
 ;------------------Read-Keyboard-Keys---
 .read:
+        push bx
+        push cx
+        push dx
                                         ; Read keyboard strokes and print to TTY
         mov cx, 0                       ; Counter to not overwrite any text made by echo driver
         mov bx, 0
@@ -44,10 +47,10 @@
         cmp al, 8
         je .backspace
 
-        inc cx
-
         cmp ah, 0x4B
         je .leftarrow
+
+        inc cx
 
         cmp ah, 0x4D
         je .rightarrow
@@ -67,7 +70,6 @@
         mov ah, 2h
         inc dl
         int 0x10
-        inc cx
         jmp .loopread
 
 .leftarrow:
@@ -88,6 +90,10 @@
         ;mov [input+bx], dx
         mov si, input
         
+        pop dx
+        pop cx
+        pop bx
+
         ret
 
 .backspace:

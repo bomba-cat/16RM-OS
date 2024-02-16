@@ -2,7 +2,7 @@
         ;Assembly Terminal made by
         ;xk-rl, ...
         ;Ver. 0.1.1
-        ;Last Modified 14 Feb, 2024
+        ;Last Modified 15 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Terminal Information
@@ -15,6 +15,9 @@
         org 20000
         bits 16
 
+        mov cx, 0
+        mov dx, 0
+
         %define NEXL 0x0D, 0x0A
         jmp .main
 ;---------------------------------------
@@ -25,8 +28,6 @@
         mov al, 1
         int 0x13
 
-        mov cx, 0
-        mov dx, 0
         jmp bx
 
 ;---------------------------------------
@@ -79,17 +80,16 @@
         call .compare
         je .reload
 
-                                        ; Resolution, switch resolution to 320x200
-                                        ; Switch back using clear command
-        mov di, res1
-        call .compare
-        je .res1
-
                                         ; Exit, return to kernl
         mov di, exit
         call .compare
         je .loadkernel
 
+                                        ; Test, developer command, for testing future commands
+                                        ; or drivers
+        mov di, screensaver
+        call .compare
+        je .screensaver
                                         ; If nothing, echo given command
         mov cl, 6
         mov bx, 10000
@@ -119,10 +119,9 @@
         mov bx, 9000
         call .loaddriver
 
-.res1:
-        mov ah, 0h
-        mov al, 1h
-        int 0x10
+.screensaver:
+        mov cl, 11
+        mov bx, 31000
         jmp .main
 
 ;---------------------------------------
@@ -140,8 +139,8 @@ clear:
 reload:
         db 'reload', 0
 
-res1:
-        db 'res1', 0
-
 exit:
         db 'exit', 0
+
+screensaver:
+        db 'screensaver', 0
