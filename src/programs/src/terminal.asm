@@ -2,7 +2,7 @@
         ;Assembly Terminal made by
         ;xk-rl, ...
         ;Ver. 0.1.1
-        ;Last Modified 15 Feb, 2024
+        ;Last Modified 16 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Terminal Information
@@ -85,11 +85,10 @@
         call .compare
         je .loadkernel
 
-                                        ; Test, developer command, for testing future commands
-                                        ; or drivers
-        mov di, screensaver
+                                        ; Lines, cool program
+        mov di, lines
         call .compare
-        je .screensaver
+        je .lines
                                         ; If nothing, echo given command
         mov cl, 6
         mov bx, 10000
@@ -119,9 +118,10 @@
         mov bx, 9000
         call .loaddriver
 
-.screensaver:
+.lines:
         mov cl, 11
         mov bx, 31000
+        call .loaddriver
         jmp .main
 
 ;---------------------------------------
@@ -142,5 +142,5 @@ reload:
 exit:
         db 'exit', 0
 
-screensaver:
-        db 'screensaver', 0
+lines:
+        db 'lines', 0

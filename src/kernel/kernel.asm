@@ -2,7 +2,7 @@
         ;16RM-OS Kernel made by
         ;xk-rl, ...
         ;Ver. 0.2.2
-        ;Last Modified 15 Feb, 2024
+        ;Last Modified 16 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Kernel Information
@@ -38,6 +38,7 @@
         mov bx, 10000
         call .loaddriver
 
+                                        ; Keyboard test
         ;mov si, kb_test_space
         ;mov cl, 6
         ;mov bx, 10000
@@ -59,10 +60,6 @@
 
         mov cl, 10
         mov bx, 20000
-        call .loaddriver
-
-        mov cl, 11
-        mov bx, 31000
         call .loaddriver
 
         mov si, finished
