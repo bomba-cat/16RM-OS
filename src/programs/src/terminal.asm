@@ -2,7 +2,7 @@
         ;Assembly Terminal made by
         ;xk-rl, ...
         ;Ver. 0.1.1
-        ;Last Modified 16 Feb, 2024
+        ;Last Modified 17 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Terminal Information

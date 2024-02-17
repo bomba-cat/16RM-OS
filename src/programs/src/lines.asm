@@ -145,9 +145,6 @@
                                         ; Return back to called program
                                         ; and reset video mode to 720x400
         mov ah, 0h
-        mov bh, 1h
-        int 0x10
-        mov ah, 0h
         mov bh, 3h
         int 0x10
         ret
