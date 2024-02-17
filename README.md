@@ -46,6 +46,7 @@
 | 6 | Echo |
 | 7 | Load Sector |
 | 10 | Terminal |
+| 11 | Lines |
 
 # Important
 Any other sector is free to use. Overwriting any sectors is possible, but at your own risk
