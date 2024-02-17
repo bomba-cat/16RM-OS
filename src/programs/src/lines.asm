@@ -2,7 +2,7 @@
         ;Screensaver made by
         ;xk-rl, ...
         ;Ver. 0.0.1
-        ;Last Modified 15 Feb, 2024
+        ;Last Modified 17 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Screensaver Information
@@ -20,6 +20,12 @@
 ;--------------------------------Main---
 
 .main:
+                                        ; Push all modified registers
+        push ax
+        push bx
+        push cx
+        push dx
+        push si
                                         ; Set video mode to 320x200 color mode
         mov ah, 0h
         mov al, 13h
@@ -51,6 +57,10 @@
         je .resetal
 
         int 0x10
+
+        mov ah, 1
+        int 0x16
+        jnz .finish
                                         ; Uncomment for no delay
         ;jmp .checkx
 
@@ -126,5 +136,18 @@
 ;------------------------------Finish---
 
 .finish:
+                                        ; Pop registers
+        pop si
+        pop dx
+        pop cx
+        pop bx
+        pop ax
                                         ; Return back to called program
+                                        ; and reset video mode to 720x400
+        mov ah, 0h
+        mov bh, 1h
+        int 0x10
+        mov ah, 0h
+        mov bh, 3h
+        int 0x10
         ret

@@ -69,6 +69,7 @@
         int 0x10
         mov ah, 2h
         inc dl
+        inc bx
         int 0x10
         jmp .loopread
 
@@ -76,6 +77,7 @@
         cmp cx, 0
         je .loopread
         dec cx
+        dec bx
         mov ah, 3h
         int 0x10
         mov ah, 2h

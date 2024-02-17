@@ -89,6 +89,11 @@
         mov di, lines
         call .compare
         je .lines
+
+        mov di, help
+        call .compare
+        je .help
+
                                         ; If nothing, echo given command
         mov cl, 6
         mov bx, 10000
@@ -124,11 +129,21 @@
         call .loaddriver
         jmp .main
 
+.help:
+        mov si, helpmsg
+        mov cl, 6
+        mov bx, 10000
+        call .loaddriver
+        jmp .main
+
 ;---------------------------------------
 ;--------------------------------Data---
 
 tty:
-        db NEXL, '16RM-TTY-> ', 0
+        db NEXL, '] ', 0
+
+helpmsg:
+        db 'reboot, clear, reload, exit, lines, help', 0
 
 reboot:
         db 'reboot', 0
@@ -144,3 +159,6 @@ exit:
 
 lines:
         db 'lines', 0
+
+help:
+        db 'help', 0
