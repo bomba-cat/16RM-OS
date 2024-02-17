@@ -26,7 +26,7 @@ dd if=./src/library/build/color.bin of=./build/image/16RM.img seek=7 conv=notrun
 nasm -f bin ./src/programs/src/terminal.asm -o ./src/programs/build/terminal.bin
 dd if=./src/programs/build/terminal.bin of=./build/image/16RM.img seek=9 conv=notrunc
 
-nasm -f bin ./src/programs/src/screensaver.asm -o ./src/programs/build/screensaver.bin
-dd if=./src/programs/build/screensaver.bin of=./build/image/16RM.img seek=10 conv=notrunc
+nasm -f bin ./src/programs/src/lines.asm -o ./src/programs/build/lines.bin
+dd if=./src/programs/build/lines.bin of=./build/image/16RM.img seek=10 conv=notrunc
 
 cp ./build/image/16RM.img ./build/image/16RM.flp

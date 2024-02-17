@@ -26,7 +26,7 @@
         int 0x10
         
                                         ; 0=right, 1=left
-        mov ax, 0
+        mov si, 0
                                         ; 0=down, 1=up
         mov bx, 0
                                         ; X Position
@@ -34,28 +34,38 @@
                                         ; Y Position
         mov dx, 0
                                         ; Color
-        mov al, 0
+        mov al, 4
 
 ;---------------------------------------
 ;----------------------------Mainloop---
 
+.resetal:
+        mov al, 4
+
 .mainloop:
         mov ah, 0Ch
-        inc al
+                                        ; Changing color
+        ;dec al
+        
+        cmp al, 0
+        je .resetal
+
         int 0x10
+                                        ; Uncomment for no delay
+        ;jmp .checkx
 
 .delay:
         push cx
         push dx
         mov ah, 0x86
         xor cx, cx
-        mov dx, 0x4240
+        mov dx, 0x4248
         int 0x15
         pop dx
         pop cx
 
 .checkx:
-        cmp ax, 0
+        cmp si, 0
         je .right
         jne .left
 
@@ -65,15 +75,15 @@
         jne .up
 
 .right:
-        dec cx
         cmp cx, 319
         je .setleft
+        inc cx
         jmp .checky
 
 .left:
-        inc cx
         cmp cx, 0
         je .setright
+        dec cx
         jmp .checky
 
 .down:
@@ -89,19 +99,27 @@
         jmp .mainloop
 
 .setleft:
-        mov ax, 1
+        mov si, 1
+        dec cx
+        inc al
         jmp .checky
 
 .setright:
-        mov ax, 0
+        mov si, 0
+        inc cx
+        inc al
         jmp .checky
 
 .setup:
         mov bx, 1
+        dec dx
+        inc al
         jmp .mainloop
 
 .setdown:
         mov bx, 0
+        inc dx
+        inc al
         jmp .mainloop
 
 ;---------------------------------------
