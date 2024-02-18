@@ -21,6 +21,7 @@
 .echo:
         push si
         push ax
+        push bx
 .loopecho:
         lodsb
         or al, al
@@ -31,6 +32,7 @@
 
         jmp .loopecho
 .finishedecho:
+        pop bx
         pop ax
         pop si
         ret

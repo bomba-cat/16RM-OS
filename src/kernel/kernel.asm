@@ -2,7 +2,7 @@
         ;16RM-OS Kernel made by
         ;xk-rl, ...
         ;Ver. 0.2.2
-        ;Last Modified 16 Feb, 2024
+        ;Last Modified 18 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Kernel Information
@@ -38,16 +38,6 @@
         mov bx, 10000
         call .loaddriver
 
-                                        ; Keyboard test
-        ;mov si, kb_test_space
-        ;mov cl, 6
-        ;mov bx, 10000
-        ;call .loaddriver
-
-        ;mov cl, 5
-        ;mov bx, 9000
-        ;call .loaddriver
-
         mov si, kb_on
         mov cl, 6
         mov bx, 10000
@@ -61,6 +51,12 @@
         mov cl, 10
         mov bx, 20000
         call .loaddriver
+
+                                        ; Create example window
+        ;mov dx, 20
+        ;mov cl, 9
+        ;mov bx, 31000
+        ;call .loaddriver
 
         mov si, finished
         mov cl, 6
@@ -78,20 +74,14 @@
 loaded: 
         db ' SUCCESS   Loaded the kernel and echo driver!', NEXL, 0
 
-kb_test:     
-        db '     JOB   Enabling keyboard, type something and hit enter', NEXL, 0
-
 kb:
-        db '     JOB   Enabling keyboard', NEXL, 0
+        db '     JOB   Loading keyboard', NEXL, 0
 
 kb_on:  
-        db ' SUCCESS   Keyboard enabled!', NEXL, 0
+        db ' SUCCESS   Keyboard loaded!', NEXL, 0
 
 kb_fail:
         db '  FAILED   Could not activate keyboard or skipped by kernel!', NEXL, 0
-
-kb_test_space:
-        db '           ', 0
 
 load_tty:
         db '     JOB   Loading TTY', NEXL, 0

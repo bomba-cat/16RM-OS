@@ -23,6 +23,9 @@ dd if=./src/library/build/loaddriver.bin of=./build/image/16RM.img seek=6 conv=n
 nasm -f bin ./src/library/src/color.asm -o ./src/library/build/color.bin
 dd if=./src/library/build/color.bin of=./build/image/16RM.img seek=7 conv=notrunc
 
+nasm -f bin ./src/library/src/window.asm -o ./src/library/build/window.bin
+dd if=./src/library/build/window.bin of=./build/image/16RM.img seek=8 conv=notrunc
+
 nasm -f bin ./src/programs/src/terminal.asm -o ./src/programs/build/terminal.bin
 dd if=./src/programs/build/terminal.bin of=./build/image/16RM.img seek=9 conv=notrunc
 

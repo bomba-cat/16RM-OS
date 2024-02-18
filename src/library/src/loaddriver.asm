@@ -2,7 +2,7 @@
         ;16RM-OS Load Driver made by
         ;xl-rl, ...
         ;Ver. 0.0.1
-        ;Last Modified 15 Feb, 2024
+        ;Last Modified 18 Feb, 2024
         ;Last Modified by, xk-rl
 ;=======================================
         ;Load Driver Information
@@ -15,6 +15,10 @@
         org 11000
         bits 16
 
+        cmp al, 0
+        je .load
+        jne .unload
+
         jmp .load
 ;---------------------------------------
 ;--------------------------------Main---
@@ -24,3 +28,7 @@
         int 0x10
 
         jmp bx
+
+.unload:
+        mov dx, 0
+        mov es, ax
