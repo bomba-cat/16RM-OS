@@ -242,5 +242,5 @@ krl_err:
         db 'CRITICAL   Could not load Kernel!', NEXL, 0
 ;---------------------------------------
 ;----------------------Bios-Signature---
-times 510-($-$$) db 0                 ; Bios signature
+times 510-($-$$) db 0	                ; Bios signature
 dw 0AA55h

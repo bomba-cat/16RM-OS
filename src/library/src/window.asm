@@ -56,7 +56,7 @@
 ;-----------------------Create-Window---
 
 .setup:
-        ;mov ax, cx
+        mov ax, cx
         mov bx, dx
 
 .create:

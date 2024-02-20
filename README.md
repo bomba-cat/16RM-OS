@@ -45,6 +45,8 @@
 | 5 | Read Keyboard |
 | 6 | Echo |
 | 7 | Load Sector |
+| 8 | Color |
+| 9 | Window |
 | 10 | Terminal |
 | 11 | Lines |
 
