@@ -68,7 +68,7 @@ ebr_signature:
         db 29h
 
 ebr_volume_id:                  
-        db 12h, 34h, 56h 78h            ; Volume ID can be anything
+        db 12h, 34h, 56h, 78h            ; Volume ID can be anything
 
 ebr_volume_label:              
         db '16RM-OS    '                ; 11 bytes, padded with spaces
