@@ -1,6 +1,8 @@
 # 16RM-OS
 16 bit realtime mode operating system made fully in assembly
 
+Replaced by Shade OS (not published yet)
+
 ## Todo list
 - ~~Kernel loading other programs~~ Applied
 - ~~Kernel either staying in 16bit or going in vt8086 mode~~ staying in 16bit mode because VME isnt stable on AMD
